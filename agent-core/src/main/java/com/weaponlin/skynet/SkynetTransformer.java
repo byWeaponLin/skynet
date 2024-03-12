@@ -10,13 +10,19 @@ import java.lang.instrument.ClassFileTransformer;
 import java.security.ProtectionDomain;
 
 public class SkynetTransformer implements ClassFileTransformer {
+    public static String clz = "org.apache.http.impl.client.InternalHttpClient";
+
     @Override
     public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined,
                             ProtectionDomain protectionDomain, byte[] classfileBuffer) {
-        System.out.println(className);
-        if (!"com/weaponlin/demo/all/App".equals(className)) {
+//        System.out.println(className);
+//        System.out.println(loader.toString());
+//        System.out.println(className + "\t" + loader.toString() + "\t" + Thread.currentThread().getContextClassLoader().toString());
+        if (!clz.equals(className.replaceAll("/", "."))) {
             return classfileBuffer;
         }
+        System.out.println("====================== modify clazz =====================s");
+
         CtClass cl = null;
         try {
             ClassPool classPool = ClassPool.getDefault();
@@ -24,9 +30,15 @@ public class SkynetTransformer implements ClassFileTransformer {
 
             CtMethod[] methods = cl.getDeclaredMethods();
             for (CtMethod ctMethod : methods) {
-                ctMethod.addLocalVariable("start", CtClass.longType);
-                ctMethod.insertBefore("start = System.currentTimeMillis();");
-                ctMethod.insertAfter("System.out.println(\"method " + ctMethod.getName() + " cost: \" + (System.currentTimeMillis() - start));");
+                if (ctMethod.getName().equals("doExecute")) {
+
+//                    ctMethod.addLocalVariable("start", CtClass.longType);
+//                    ctMethod.insertBefore("start = System.currentTimeMillis();");
+                    ctMethod.insertBefore("System.out.println(\"inject succeess\");");
+                    ctMethod.insertBefore("request.setHeader(\"xxx\", \"xxx\");;");
+//                    ctMethod.insertBefore("System.out.println(\"inject succeess, start time: \" + start);");
+//                    ctMethod.insertAfter("System.out.println(\"method " + ctMethod.getName() + " cost: \" + (System.currentTimeMillis() - start));");
+                }
             }
 
             byte[] transformed = cl.toBytecode();

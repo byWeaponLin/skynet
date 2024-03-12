@@ -14,7 +14,8 @@ public class App {
             //1.获得一个httpclient对象
             CloseableHttpClient httpclient = HttpClients.createDefault();
             //2.生成一个get请求
-            HttpGet httpget = new HttpGet("http://console.weiyun.baidu.com/");
+            HttpGet httpget = new HttpGet("http://baidu.com/");
+
             //3.执行get请求并返回结果
             response = httpclient.execute(httpget);
             System.out.println(response.toString());
