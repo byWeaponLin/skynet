@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Created-By: Weapon Lin
+Premain-Class: com.weaponlin.skynet.SkynetAgent
 Agent-Class: com.weaponlin.skynet.SkynetAgent
 Can-Redefine-Classes: true
 Can-Retransform-Classes: true
-Premain-Class: com.weaponlin.skynet.SkynetAgent
