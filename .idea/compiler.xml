@@ -6,7 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="skynet" />
+        <module name="agent-demo" />
+        <module name="agent-server-demo" />
+        <module name="agent-core" />
+        <module name="agent-client-demo" />
       </profile>
     </annotationProcessing>
   </component>
