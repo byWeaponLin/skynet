@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false" scan="true" scanPeriod="30 second">
+
+    <!-- 配置日志在容器中的输出路径 -Dlogger.console.path=/home/work/logs -->
+    <property name="path" value="${logger.console.path}"/>
+    <!-- 配置日志历史最大保留数量 -->
+    <property name="maxHistory" value="30"/>
+    <!-- 配置单个日志文件大小 -->
+    <property name="maxFileSize" value="500MB"/>
+
+    <!-- 控制台打印 -->
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder charset="utf-8">
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger{36} [%file : %line] %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!-- 控制台日志输出到console.log文件 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${path}/console.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 每天一归档 -->
+            <fileNamePattern>${path}/bak/console.log.%d{yyyy-MM-dd}-%i.zip</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>${maxFileSize}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder charset="utf-8">
+            <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger{36} [%file : %line] %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <!-- 排除指定包下的日志 -->
+<!--    <logger name="org.apache.kafka" level="on" />-->
+    <logger name="org.apache.zookeeper" level="off" />
+    <logger name="org.I0Itec.zkclient" level="off" />
+
+    <!-- Logger 根目录 -->
+    <root level="INFO">
+        <appender-ref ref="Console" />
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>

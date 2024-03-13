@@ -3,13 +3,14 @@
   <component name="CompilerConfiguration">
     <option name="USE_RELEASE_OPTION" value="false" />
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="agent-server-demo" />
         <module name="agent-core" />
         <module name="agent-client-demo" />
+        <module name="agent-server-demo" />
       </profile>
     </annotationProcessing>
   </component>
