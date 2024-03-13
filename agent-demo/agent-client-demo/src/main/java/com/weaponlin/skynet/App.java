@@ -14,11 +14,11 @@ public class App {
             //1.获得一个httpclient对象
             CloseableHttpClient httpclient = HttpClients.createDefault();
             //2.生成一个get请求
-            HttpGet httpget = new HttpGet("http://baidu.com/");
+            HttpGet httpget = new HttpGet("http://127.0.0.1:8080/metrics/logs?size=1");
 
             //3.执行get请求并返回结果
             response = httpclient.execute(httpget);
-            System.out.println(response.toString());
+            System.out.println(response.getEntity().toString());
             //4.处理结果
         } catch (Exception e) {
             e.printStackTrace();

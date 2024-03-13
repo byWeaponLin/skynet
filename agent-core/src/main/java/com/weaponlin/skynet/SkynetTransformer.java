@@ -1,6 +1,8 @@
 
 package com.weaponlin.skynet;
 
+import com.weaponlin.skynet.plugins.AbstractEnhancer;
+import com.weaponlin.skynet.plugins.httpclient4x.InternalHttpClientEnhancer;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
@@ -23,26 +25,29 @@ public class SkynetTransformer implements ClassFileTransformer {
         }
         System.out.println("====================== modify clazz =====================s");
 
-        CtClass cl = null;
+
+//        CtClass cl = null;
         try {
-            ClassPool classPool = ClassPool.getDefault();
-            cl = classPool.makeClass(new ByteArrayInputStream(classfileBuffer));
-
-            CtMethod[] methods = cl.getDeclaredMethods();
-            for (CtMethod ctMethod : methods) {
-                if (ctMethod.getName().equals("doExecute")) {
-
-//                    ctMethod.addLocalVariable("start", CtClass.longType);
-//                    ctMethod.insertBefore("start = System.currentTimeMillis();");
-                    ctMethod.insertBefore("System.out.println(\"inject succeess\");");
-                    ctMethod.insertBefore("request.setHeader(\"xxx\", \"xxx\");;");
-//                    ctMethod.insertBefore("System.out.println(\"inject succeess, start time: \" + start);");
-//                    ctMethod.insertAfter("System.out.println(\"method " + ctMethod.getName() + " cost: \" + (System.currentTimeMillis() - start));");
-                }
-            }
-
-            byte[] transformed = cl.toBytecode();
-            return transformed;
+            AbstractEnhancer enhancer = new InternalHttpClientEnhancer();
+            return enhancer.enhance(loader, className, classBeingRedefined, protectionDomain, classfileBuffer);
+//            ClassPool classPool = ClassPool.getDefault();
+//            cl = classPool.makeClass(new ByteArrayInputStream(classfileBuffer));
+//
+//            CtMethod[] methods = cl.getDeclaredMethods();
+//            for (CtMethod ctMethod : methods) {
+//                if (ctMethod.getName().equals("doExecute")) {
+//
+////                    ctMethod.addLocalVariable("start", CtClass.longType);
+////                    ctMethod.insertBefore("start = System.currentTimeMillis();");
+//                    ctMethod.insertBefore("System.out.println(\"inject succeess\");");
+//                    ctMethod.insertBefore("request.setHeader(\"xxx\", \"xxx\");;");
+////                    ctMethod.insertBefore("System.out.println(\"inject succeess, start time: \" + start);");
+////                    ctMethod.insertAfter("System.out.println(\"method " + ctMethod.getName() + " cost: \" + (System.currentTimeMillis() - start));");
+//                }
+//            }
+//
+//            byte[] transformed = cl.toBytecode();
+//            return transformed;
         } catch (Exception e) {
             e.printStackTrace();
         }
