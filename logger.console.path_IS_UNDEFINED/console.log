@@ -1,0 +1,50 @@
+2024-03-14 21:47:49.640 INFO [main] com.weaponlin.skynet.App [StartupInfoLogger.java : 50] Starting App on MacintoshdeMacBook-Pro-106.local with PID 24748 (/Users/linweipeng/baidu/bpit-inf/skynet/skynet/agent-demo/agent-server-demo/target/classes started by linweipeng in /Users/linweipeng/baidu/bpit-inf/skynet/skynet)
+2024-03-14 21:47:49.643 INFO [main] com.weaponlin.skynet.App [SpringApplication.java : 675] No active profile set, falling back to default profiles: default
+2024-03-14 21:47:52.639 INFO [main] o.s.b.w.e.tomcat.TomcatWebServer [TomcatWebServer.java : 90] Tomcat initialized with port(s): 8080 (http)
+2024-03-14 21:47:52.664 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Initializing ProtocolHandler ["http-nio-8080"]
+2024-03-14 21:47:52.678 INFO [main] o.a.catalina.core.StandardService [DirectJDKLog.java : 173] Starting service [Tomcat]
+2024-03-14 21:47:52.678 INFO [main] o.a.catalina.core.StandardEngine [DirectJDKLog.java : 173] Starting Servlet engine: [Apache Tomcat/9.0.16]
+2024-03-14 21:47:52.688 INFO [main] o.a.c.core.AprLifecycleListener [DirectJDKLog.java : 173] The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/linweipeng/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+2024-03-14 21:47:52.779 INFO [main] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring embedded WebApplicationContext
+2024-03-14 21:47:52.779 INFO [main] o.s.web.context.ContextLoader [ServletWebServerApplicationContext.java : 296] Root WebApplicationContext: initialization completed in 3015 ms
+2024-03-14 21:47:53.032 INFO [main] o.s.s.c.ThreadPoolTaskExecutor [ExecutorConfigurationSupport.java : 171] Initializing ExecutorService 'applicationTaskExecutor'
+2024-03-14 21:47:53.191 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Starting ProtocolHandler ["http-nio-8080"]
+2024-03-14 21:47:53.217 INFO [main] o.s.b.w.e.tomcat.TomcatWebServer [TomcatWebServer.java : 204] Tomcat started on port(s): 8080 (http) with context path ''
+2024-03-14 21:47:53.227 INFO [main] com.weaponlin.skynet.App [StartupInfoLogger.java : 59] Started App in 4.152 seconds (JVM running for 4.884)
+2024-03-14 21:48:00.275 INFO [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-03-14 21:48:00.276 INFO [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet [FrameworkServlet.java : 524] Initializing Servlet 'dispatcherServlet'
+2024-03-14 21:48:00.293 INFO [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet [FrameworkServlet.java : 546] Completed initialization in 16 ms
+2024-03-14 21:48:00.405 INFO [http-nio-8080-exec-1] c.w.skynet.controller.UserController [UserController.java : 21] receive request, traceId: 192871321jads7q2g312f7sd
+2024-03-14 21:49:54.231 INFO [http-nio-8080-exec-3] c.w.skynet.controller.UserController [UserController.java : 21] receive request, traceId: 192871321jads7q2g312f7sd
+2024-03-14 21:52:55.033 INFO [Thread-10] o.s.s.c.ThreadPoolTaskExecutor [ExecutorConfigurationSupport.java : 208] Shutting down ExecutorService 'applicationTaskExecutor'
+2024-03-14 21:53:04.614 INFO [main] com.weaponlin.skynet.App [StartupInfoLogger.java : 50] Starting App on MacintoshdeMacBook-Pro-106.local with PID 25357 (/Users/linweipeng/baidu/bpit-inf/skynet/skynet/agent-demo/agent-server-demo/target/classes started by linweipeng in /Users/linweipeng/baidu/bpit-inf/skynet/skynet)
+2024-03-14 21:53:04.617 INFO [main] com.weaponlin.skynet.App [SpringApplication.java : 675] No active profile set, falling back to default profiles: default
+2024-03-14 21:53:05.814 INFO [main] o.s.b.w.e.tomcat.TomcatWebServer [TomcatWebServer.java : 90] Tomcat initialized with port(s): 8080 (http)
+2024-03-14 21:53:05.831 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Initializing ProtocolHandler ["http-nio-8080"]
+2024-03-14 21:53:05.841 INFO [main] o.a.catalina.core.StandardService [DirectJDKLog.java : 173] Starting service [Tomcat]
+2024-03-14 21:53:05.841 INFO [main] o.a.catalina.core.StandardEngine [DirectJDKLog.java : 173] Starting Servlet engine: [Apache Tomcat/9.0.16]
+2024-03-14 21:53:05.850 INFO [main] o.a.c.core.AprLifecycleListener [DirectJDKLog.java : 173] The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [/Users/linweipeng/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+2024-03-14 21:53:05.935 INFO [main] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring embedded WebApplicationContext
+2024-03-14 21:53:05.936 INFO [main] o.s.web.context.ContextLoader [ServletWebServerApplicationContext.java : 296] Root WebApplicationContext: initialization completed in 1272 ms
+2024-03-14 21:53:06.194 INFO [main] o.s.s.c.ThreadPoolTaskExecutor [ExecutorConfigurationSupport.java : 171] Initializing ExecutorService 'applicationTaskExecutor'
+2024-03-14 21:53:06.374 INFO [main] o.a.coyote.http11.Http11NioProtocol [DirectJDKLog.java : 173] Starting ProtocolHandler ["http-nio-8080"]
+2024-03-14 21:53:06.405 INFO [main] o.s.b.w.e.tomcat.TomcatWebServer [TomcatWebServer.java : 204] Tomcat started on port(s): 8080 (http) with context path ''
+2024-03-14 21:53:06.426 INFO [main] com.weaponlin.skynet.App [StartupInfoLogger.java : 59] Started App in 2.299 seconds (JVM running for 3.47)
+2024-03-14 21:53:12.195 INFO [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/] [DirectJDKLog.java : 173] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-03-14 21:53:12.196 INFO [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet [FrameworkServlet.java : 524] Initializing Servlet 'dispatcherServlet'
+2024-03-14 21:53:12.218 INFO [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet [FrameworkServlet.java : 546] Completed initialization in 21 ms
+2024-03-14 21:53:20.738 INFO [http-nio-8080-exec-8] c.w.skynet.controller.UserController [UserController.java : 22] receive request, traceId: null
+2024-03-14 21:56:18.502 INFO [http-nio-8080-exec-1] c.w.skynet.controller.UserController [UserController.java : 22] receive request, traceId: null
+2024-03-14 22:00:18.293 INFO [http-nio-8080-exec-3] c.w.skynet.controller.UserController [UserController.java : 22] receive request, traceId: null
+2024-03-14 22:06:04.196 INFO [http-nio-8080-exec-5] c.w.skynet.controller.UserController [UserController.java : 22] receive request, traceId: null
+2024-03-14 22:06:57.793 INFO [http-nio-8080-exec-6] c.w.skynet.controller.UserController [UserController.java : 22] receive request, traceId: null
+2024-03-14 22:09:25.380 INFO [http-nio-8080-exec-9] c.w.skynet.controller.UserController [UserController.java : 22] receive request, traceId: null
+2024-03-14 22:10:00.841 INFO [http-nio-8080-exec-1] c.w.skynet.controller.UserController [UserController.java : 22] receive request, traceId: null
+2024-03-14 22:10:21.110 INFO [http-nio-8080-exec-3] c.w.skynet.controller.UserController [UserController.java : 22] receive request, traceId: null
+2024-03-14 22:10:40.813 INFO [http-nio-8080-exec-5] c.w.skynet.controller.UserController [UserController.java : 22] receive request, traceId: null
+2024-03-14 22:11:09.980 INFO [http-nio-8080-exec-6] c.w.skynet.controller.UserController [UserController.java : 22] receive request, traceId: null
+2024-03-14 22:11:53.256 INFO [http-nio-8080-exec-9] c.w.skynet.controller.UserController [UserController.java : 22] receive request, traceId: null
+2024-03-14 22:12:51.089 INFO [http-nio-8080-exec-1] c.w.skynet.controller.UserController [UserController.java : 22] receive request, traceId: null
+2024-03-14 22:15:08.689 INFO [http-nio-8080-exec-3] c.w.skynet.controller.UserController [UserController.java : 22] receive request, traceId: null
+2024-03-14 22:15:46.026 INFO [http-nio-8080-exec-5] c.w.skynet.controller.UserController [UserController.java : 22] receive request, traceId: null
+2024-03-14 22:15:56.070 INFO [Thread-8] o.s.s.c.ThreadPoolTaskExecutor [ExecutorConfigurationSupport.java : 208] Shutting down ExecutorService 'applicationTaskExecutor'

@@ -22,7 +22,9 @@ public class App {
 
             //3.执行get请求并返回结果
             response = httpclient.execute(httpget);
-            System.out.println(response.getEntity().toString());
+
+            System.out.println(response.toString());
+            System.out.println(response.getStatusLine().getStatusCode());
             //4.处理结果
         } catch (Exception e) {
             e.printStackTrace();
