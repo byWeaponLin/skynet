@@ -19,11 +19,11 @@ public class UserController {
 
     @GetMapping("/list")
     public ResponseEntity<?> getUsers(HttpServletRequest request) {
-        log.info("receive request, traceId: {}", request.getHeader("traceId"));
+        log.info("receive request, traceId from request header: {}", request.getHeader("X-Trace-Id"));
         ArrayList<User> users = Lists.newArrayList(
                 new User().setId(1L).setAge(20).setGender("F").setName("xxx").setDel(0)
         );
-        return new ResponseEntity<Object>(users, HttpStatus.ACCEPTED);
+        return new ResponseEntity<Object>(users, HttpStatus.OK);
     }
 
 }
