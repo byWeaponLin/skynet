@@ -2,7 +2,7 @@
 <configuration debug="false" scan="true" scanPeriod="30 second">
 
     <!-- 配置日志在容器中的输出路径 -Dlogger.console.path=/home/work/logs -->
-    <property name="path" value="${logger.console.path}"/>
+    <property name="path" value="logs"/>
     <!-- 配置日志历史最大保留数量 -->
     <property name="maxHistory" value="30"/>
     <!-- 配置单个日志文件大小 -->

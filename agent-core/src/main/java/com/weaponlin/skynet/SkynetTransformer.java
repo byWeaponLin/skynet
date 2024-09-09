@@ -3,11 +3,7 @@ package com.weaponlin.skynet;
 
 import com.weaponlin.skynet.plugins.AbstractEnhancer;
 import com.weaponlin.skynet.plugins.httpclient4x.InternalHttpClientEnhancer;
-import javassist.ClassPool;
-import javassist.CtClass;
-import javassist.CtMethod;
 
-import java.io.ByteArrayInputStream;
 import java.lang.instrument.ClassFileTransformer;
 import java.security.ProtectionDomain;
 

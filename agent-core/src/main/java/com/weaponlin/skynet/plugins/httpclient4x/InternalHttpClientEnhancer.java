@@ -5,6 +5,7 @@ import javassist.CannotCompileException;
 import javassist.ClassPool;
 import javassist.CtClass;
 import javassist.CtMethod;
+import javassist.CtNewMethod;
 import javassist.expr.ExprEditor;
 import javassist.expr.MethodCall;
 
@@ -69,52 +70,74 @@ public class InternalHttpClientEnhancer extends AbstractEnhancer {
 //    }
 
 
+    /**
+     * 暂时注释
+     */
+//    @Override
+//    public byte[] enhance(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) {
+//        CtClass cl = null;
+//        try {
+//            ClassPool classPool = ClassPool.getDefault();
+//            cl = classPool.makeClass(new ByteArrayInputStream(classfileBuffer));
+//
+//            CtMethod[] methods = cl.getDeclaredMethods();
+//            for (CtMethod ctMethod : methods) {
+//                if (ctMethod.getName().equals("doExecute")) {
+//                    ctMethod.instrument(new ExprEditor() {
+//                        @Override
+//                        public void edit(MethodCall m) throws CannotCompileException {
+//                            if (m.getMethodName().equals("execute")) {
+//                                m.replace("{" +
+//                                        "  long startTime = System.currentTimeMillis();" +
+//                                        "  try {" +
+//                                        "    $_ = $proceed( $$);" +
+//                                        "  } catch (Throwable t) {" +
+//                                        "    // 异常处理逻辑，例如记录日志或重新抛出异常" +
+//                                        "    throw t;" +
+//                                        "  } " +
+//                                        "  long endTime = System.currentTimeMillis();" +
+//                                        "  long duration = endTime - startTime;" +
+//                                        "  System.out.println(duration);                   " +
+//                                        "  return $_;                   " +
+//                                        "}");
+//                            }
+//
+//                        }
+//                    });
+//                }
+//            }
+//
+//            byte[] transformed = cl.toBytecode();
+//            return transformed;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return classfileBuffer;
+//    }
+
     @Override
     public byte[] enhance(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain, byte[] classfileBuffer) {
-        CtClass cl = null;
+        CtClass cc = null;
         try {
             ClassPool classPool = ClassPool.getDefault();
-            cl = classPool.makeClass(new ByteArrayInputStream(classfileBuffer));
+            cc = classPool.makeClass(new ByteArrayInputStream(classfileBuffer));
 
-            CtMethod[] methods = cl.getDeclaredMethods();
-            for (CtMethod ctMethod : methods) {
-                if (ctMethod.getName().equals("doExecute")) {
+            CtMethod m = cc.getDeclaredMethod("doExecute");
 
-                    ctMethod.instrument(new ExprEditor() {
-                        @Override
-                        public void edit(MethodCall m) throws CannotCompileException {
-                            if (m.getMethodName().equals("execute")) {
-                                m.replace("{" +
-                                        "  long startTime = System.currentTimeMillis();" +
-                                        "  try {" +
-                                        "    $_ = $proceed( $$);" +
-                                        "  } catch (Throwable t) {" +
-                                        "    // 异常处理逻辑，例如记录日志或重新抛出异常" +
-                                        "    throw t;" +
-                                        "  } " +
-                                        "  long endTime = System.currentTimeMillis();" +
-                                        "  long duration = endTime - startTime;" +
-                                        "  System.out.println(duration);                   " +
-                                        "  return $_;                   " +
-                                        "}");
-                            }
+            m.addLocalVariable("startTime", CtClass.longType);
+            m.insertBefore("startTime = System.currentTimeMillis();");
+            m.insertBefore("{ " +
+                    "org.apache.http.HttpRequest req = $1;" +
+                    "req.addHeader(\"traceId\", " + "\"123456\");" +
+                    "req.addHeader(\"spanId\", " + "\"7891011\");" +
+                    "}");
 
-                        }
-                    });
-                    //                                        "  finally {" +
-//                                        "      long endTime = System.currentTimeMillis();" +
-//                                        "      long duration = endTime - startTime;" +
-//                                        "      System.out.println(\"HTTP request executed in \" + duration + \" ms\");" +
-//                                        "  }" +
+            m.insertAfter("{ " +
+                    "long endTime = System.currentTimeMillis();" +
+                    "System.out.println(\"Request took \" + (endTime - startTime) + \" ms\");" +
+                    "}");
 
-//                    ctMethod.insertBefore("System.out.println(\"inject succeess\");");
-//                    ctMethod.insertBefore("System.out.println(\"inject succeess2\");");
-//                    ctMethod.insertBefore("request.setHeader(\"traceId\", \"192871321jads7q2g312f7sd\");");
-                }
-            }
-
-            byte[] transformed = cl.toBytecode();
-            return transformed;
+            return cc.toBytecode();
         } catch (Exception e) {
             e.printStackTrace();
         }
