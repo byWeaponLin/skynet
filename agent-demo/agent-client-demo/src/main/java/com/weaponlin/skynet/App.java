@@ -10,6 +10,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.protocol.HttpContext;
 
 import java.io.IOException;
+import java.util.UUID;
 
 public class App {
     public static void main(String[] args) throws IOException {
@@ -19,7 +20,7 @@ public class App {
             CloseableHttpClient httpclient = HttpClients.createDefault();
             //2.生成一个get请求
             HttpGet httpget = new HttpGet("http://127.0.0.1:8080/user/list");
-
+//            httpget.addHeader("X-Trace-Id", UUID.randomUUID().toString());
             //3.执行get请求并返回结果
             response = httpclient.execute(httpget);
 

@@ -1,13 +1,14 @@
 
 package com.weaponlin.skynet;
 
-import com.weaponlin.skynet.plugins.httpclient4x.HttpClientInterceptor;
-import com.weaponlin.skynet.plugins.tomcat.TomcatInterceptor;
+import com.weaponlin.skynet.plugins.Plugin;
+import com.weaponlin.skynet.plugins.PluginsLoader;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.asm.Advice;
 import net.bytebuddy.matcher.ElementMatchers;
 
 import java.lang.instrument.Instrumentation;
+import java.util.List;
 
 public class SkynetAgent {
     /**
@@ -17,27 +18,18 @@ public class SkynetAgent {
      * @param inst
      */
     public static void premain(String agentArgs, Instrumentation inst) {
-        AgentBuilder.Default agentBuilder = new AgentBuilder.Default();
-        agentBuilder.type(ElementMatchers.named("org.apache.http.impl.client.InternalHttpClient"))
-                .transform((builder, typeDescription, classLoader, module) ->
-                        builder.method(ElementMatchers.named("doExecute"))
-                                .intercept(Advice.to(HttpClientInterceptor.class)))
-                .installOn(inst);
+        System.out.println("skynet agent premain");
 
-//        agentBuilder.type(ElementMatchers.named("org.apache.catalina.connector.Request"))
-//                .transform((builder, typeDescription, classLoader, module) ->
-//                        builder.method(ElementMatchers.named("startAsync"))
-//                                .intercept(Advice.to(TomcatInterceptor.class)));
-//
-//        agentBuilder.installOn(inst);
-
-
-//        new AgentBuilder.Default()
-//                .type(ElementMatchers.named("org.apache.catalina.connector.Request"))
-//                .transform((builder, typeDescription, classLoader, module) ->
-//                        builder.method(ElementMatchers.named("startAsync"))
-//                                .intercept(Advice.to(TomcatInterceptor.class)))
-//                .installOn(inst);
+        AgentBuilder agentBuilder = new AgentBuilder.Default();
+        List<Plugin> plugins = PluginsLoader.getPlugins();
+        for (Plugin plugin : plugins) {
+            agentBuilder = agentBuilder.type(ElementMatchers.named(plugin.getClazzName()))
+                    .transform((builder, typeDescription, classLoader, module) -> {
+                        return builder.method(ElementMatchers.namedOneOf(plugin.getMethods()))
+                                .intercept(Advice.to(plugin.getClazz()));
+                    });
+        }
+        agentBuilder.installOn(inst);
     }
 
     /**
@@ -47,11 +39,16 @@ public class SkynetAgent {
      * @param inst
      */
     public static void agentmain(String agentArgs, Instrumentation inst) {
-        new AgentBuilder.Default()
-                .type(ElementMatchers.named("org.apache.http.impl.client.InternalHttpClient"))
-                .transform((builder, typeDescription, classLoader, module) ->
-                        builder.method(ElementMatchers.named("doExecute"))
-                                .intercept(Advice.to(HttpClientInterceptor.class)))
-                .installOn(inst);
+        System.out.println("skynet agent agentmain");
+        AgentBuilder agentBuilder = new AgentBuilder.Default();
+        List<Plugin> plugins = PluginsLoader.getPlugins();
+        for (Plugin plugin : plugins) {
+            agentBuilder = agentBuilder.type(ElementMatchers.named(plugin.getClazzName()))
+                    .transform((builder, typeDescription, classLoader, module) -> {
+                        return builder.method(ElementMatchers.namedOneOf(plugin.getMethods()))
+                                .intercept(Advice.to(plugin.getClazz()));
+                    });
+        }
+        agentBuilder.installOn(inst);
     }
 }
